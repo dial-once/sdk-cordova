@@ -1,0 +1,37 @@
+{
+  "name": "cordova-plugin-dialonce",
+  "version": "1.0.0",
+  "description": "Cordova plugin for Dial Once for mobile",
+  "cordova": {
+    "id": "cordova-plugin-dialonce",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dial-once/dialonce-cordova.git"
+  },
+  "keywords": [
+    "dialonce",
+    "dialonce-cordova",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    },
+    {
+      "name": "cordova-android",
+      "version": ">=4.0.0"
+    }
+  ],
+  "author": "Dial Once",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/dial-once/dialonce-cordova/issues"
+  },
+  "homepage": "https://github.com/dial-once/dialonce-cordova#readme"
+}
