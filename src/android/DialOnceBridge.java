@@ -33,8 +33,9 @@ public class DialOnceBridge extends CordovaPlugin {
                     ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
 
                     DialOnce.init(context, applicationInfo.metaData.getString("DIALONCE_API_KEY"));
-                } catch (Exception e) {
-                    System.err.println("[DialOnce-Cordova] ERROR: Something went wrong when initializing DialOnce. Have you set your ANDROID_API_KEY?");
+                } catch (Exception exception) {
+                    System.err.println("[dialonce-cordova] Something went wrong when initializing DialOnce: " + exception.getMessage());
+                    System.err.println("[dialonce-cordova] Have you set your ANDROID_API_KEY ?");
                 }
             }
         });
