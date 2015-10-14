@@ -22,11 +22,11 @@ To install the plugin in your Cordova app, run the following command:
 
 To add the plugin to your PhoneGap app, add the following snippet to your `config.xml`:
 
-	```xml
-	<gap:plugin name="cordova-plugin-dialonce" source="npm">
-	  <param name="ANDROID_API_KEY" value="<ANDROID_API_KEY>" />
-	</gap:plugin>
-	```
+```xml
+<gap:plugin name="cordova-plugin-dialonce" source="npm">
+  <param name="ANDROID_API_KEY" value="<ANDROID_API_KEY>" />
+</gap:plugin>
+```
 
 ## Getting Started with Cordova
 
