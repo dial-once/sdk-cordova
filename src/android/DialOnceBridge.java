@@ -13,19 +13,19 @@ import com.dialonce.sdk.DialOnce;
 public class DialOnceBridge extends CordovaPlugin {
 
     @Override protected void pluginInitialize() {
-        this.setUpDialOnce();
+        this.initDialOnce();
     }
 
     @Override public void onStart() {
         //We also initialize Dial Once here just in case it has died. If Dial Once is already set up, this won't do anything.
-        this.setUpDialOnce();
+        this.initDialOnce();
     }
 
     @Override public void onNewIntent(Intent intent) {
         cordova.getActivity().setIntent(intent);
     }
 
-    private void setUpDialOnce() {
+    private void initDialOnce() {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override public void run() {
                 try {
