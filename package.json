@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dial-once/dialonce-cordova.git"
+    "url": "git+https://github.com/dial-once/sdk-cordova.git"
   },
   "keywords": [
     "dialonce",
@@ -31,7 +31,7 @@
   "author": "Dial Once Team",
   "license": "MIT License",
   "bugs": {
-    "url": "https://github.com/dial-once/dialonce-cordova/issues"
+    "url": "https://github.com/dial-once/sdk-cordova/issues"
   },
-  "homepage": "https://github.com/dial-once/dialonce-cordova#readme"
+  "homepage": "https://github.com/dial-once/sdk-cordova#readme"
 }
