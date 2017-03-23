@@ -52,7 +52,7 @@ Specify a set of target platforms by executing:
 
 Install the dialonce-cordova plugin by executing:
 
-	$ cordova plugin add dialonce-cordova --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
+	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
 
 
 ## Example
@@ -61,4 +61,4 @@ Install the dialonce-cordova plugin by executing:
 	$ cordova create myApp
 	$ cd myApp/
 	$ cordova platform add android
-	$ cordova plugin add dialonce-cordova --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
+	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
