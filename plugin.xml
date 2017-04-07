@@ -12,22 +12,32 @@
       <engine name="cordova-android" version=">=4.0.0" />
     </engines>
 
+    <!-- android -->
     <platform name="android">
-      <preference name="ANDROID_API_KEY"/>
+        <preference name="ANDROID_API_KEY"/>
 
-      <source-file src="src/android/DialOnceBridge.java" target-dir="src/com/dialonce/sdk" />
-      <framework src="src/android/dialonce.gradle" custom="true" type="gradleReference" />
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.CALL_PHONE" />
+            <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-permission android:name="android.permission.GET_TASKS" />
+            <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="application">
+            <meta-data android:name="DIALONCE_API_KEY" android:value="$ANDROID_API_KEY"/>
+        </config-file>
 
-      <config-file target="config.xml" parent="*/">
-        <feature name="DialOnce">
-          <param name="android-package" value="com.dialonce.sdk.DialOnceBridge" />
-          <param name="onload" value="true" />
-        </feature>
-      </config-file>
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="DialOnce" >
+                <param name="android-package" value="com.dialonce.sdk.DialOnceBridge" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
 
-      <config-file target="AndroidManifest.xml" parent="application">
-          <meta-data android:name="DIALONCE_API_KEY" android:value="$ANDROID_API_KEY"/>
-      </config-file>
+        <source-file src="src/android/DialOnceBridge.java" target-dir="src/com/dialonce/sdk" />
+        <framework src="src/android/dialonce.gradle" custom="true" type="gradleReference" />
     </platform>
-
 </plugin>

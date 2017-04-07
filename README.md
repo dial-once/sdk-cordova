@@ -16,7 +16,7 @@ The Dial Once SDK is brought in automatically. There is no need to change or add
 
 To install the plugin in your Cordova app, run the following command:
 
-    $ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
+    $ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY="<ANDROID_API_KEY>"
 
 ### PhoneGap
 
@@ -52,7 +52,7 @@ Specify a set of target platforms by executing:
 
 Install the dialonce-cordova plugin by executing:
 
-	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
+	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY="<ANDROID_API_KEY>"
 
 
 ## Example
@@ -61,4 +61,4 @@ Install the dialonce-cordova plugin by executing:
 	$ cordova create myApp
 	$ cd myApp/
 	$ cordova platform add android
-	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY='<ANDROID_API_KEY>'
+	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY="<ANDROID_API_KEY>"
