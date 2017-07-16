@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.dialonce.sdk.DialOnce;
 
@@ -37,7 +38,11 @@ public class DialOnceBridge extends CordovaPlugin {
     }
 
     private void initDialOnce() {
-        cordova.requestPermissions(this, REQUEST_CODE_PERMISSION, permissions);       
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!hasPermissions(permissions)) {
+                cordova.requestPermissions(this, REQUEST_CODE_PERMISSION, permissions);
+            }
+        }
     }
 
     @Override
@@ -64,5 +69,15 @@ public class DialOnceBridge extends CordovaPlugin {
                 }
             });
         }
+    }
+
+    private boolean hasPermissions(String[] permissions) {
+        for (String perm : permissions) {
+            if (!cordova.hasPermission(perm)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
