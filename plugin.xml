@@ -8,9 +8,13 @@
     <keywords>dialonce,dialonce-cordova</keywords>
 
     <engines>
-      <engine name="cordova" version=">=3.0.0" />
-      <engine name="cordova-android" version=">=4.0.0" />
+        <engine name="cordova" version=">=3.0.0" />
+        <engine name="cordova-android" version=">=4.0.0" />
     </engines>
+
+    <js-module src="www/dialonce.js" name="DialOnce">
+        <clobbers target="navigator.dialonce" />
+    </js-module>
 
     <!-- android -->
     <platform name="android">
@@ -27,7 +31,7 @@
         </config-file>
         
         <config-file target="AndroidManifest.xml" parent="application">
-            <meta-data android:name="DIALONCE_API_KEY" android:value="$ANDROID_API_KEY"/>
+            <meta-data android:name="DIAL_ONCE_API_KEY" android:value="$ANDROID_API_KEY"/>
         </config-file>
 
         <config-file target="res/xml/config.xml" parent="/*">

@@ -17,7 +17,8 @@ sample: $(TESTAPP_PATH)
 
 build: sample
 	cd $(TESTAPP_PATH); cordova build android
-	zip build/cordova-plugin-dialonce-$(shell date "+%d-%m-%Y").zip -r src package.json plugin.xml README.md
+	mkdir -p $(PWD)/build/sdk
+	zip build/sdk/cordova-plugin-dialonce-$(shell date "+%d-%m-%Y").zip -r src www package.json plugin.xml README.md
 
 publish:
 	npm login
