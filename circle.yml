@@ -5,7 +5,7 @@ dependencies:
 general:
   artifacts:
     - build/sample/platforms/android/build/outputs/apk/android-debug.apk
-    - build/cordova-plugin-dialonce-*.zip
+    - build/sdk
 
 test:
   pre:
