@@ -54,7 +54,6 @@ Install the dialonce-cordova plugin by executing:
 
 	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY="<ANDROID_API_KEY>"
 
-
 ## Example
 
 	# Create initial Cordova app
@@ -62,3 +61,9 @@ Install the dialonce-cordova plugin by executing:
 	$ cd myApp/
 	$ cordova platform add android
 	$ cordova plugin add cordova-plugin-dialonce --variable ANDROID_API_KEY="<ANDROID_API_KEY>"
+
+## API
+
+Dial-Once SDK works as an autonomous component. One thing which needs to be done is to request for permissions. This can be done by `navigator.dialonce.requestPermissions()` call. 
+
+This is important becuase beginning in Android 6.0 (API level 23), users grant permissions to apps while the app is running, not when they install the app. And without these permissions, the SDK will not able to work properly.

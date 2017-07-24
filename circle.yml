@@ -1,0 +1,16 @@
+dependencies:
+  pre:
+    - make prereq
+
+general:
+  artifacts:
+    - build/sample/platforms/android/build/outputs/apk/android-debug.apk
+    - build/sdk
+
+test:
+  pre:
+    - make build
+
+machine:
+  environment:
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
