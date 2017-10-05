@@ -3,5 +3,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.dialonce:dialonce-android:+'
+    compile ('com.dialonce:dialonce-android:+') {
+    	exclude group: 'com.google.code.findbugs'
+    }
 }
