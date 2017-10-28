@@ -1,6 +1,6 @@
 dependencies:
   pre:
-    - make prereq
+    - make deps
 
 general:
   artifacts:
