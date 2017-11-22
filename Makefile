@@ -5,8 +5,11 @@ TESTPLUGIN_PATH=$(BUILD_DIR)/plugin
 
 .PHONY: prereq test sample build clean
 
-prereq:
+deps:
 	npm install -g cordova
+	echo y | android update sdk --no-ui --all --filter tools
+	echo y | $(ANDROID_HOME)/tools/bin/sdkmanager "platforms;android-26" "build-tools;26.0.1" "system-images;android-24;google_apis;armeabi-v7a" "extras;google;m2repository" tools emulator
+	yes | $(ANDROID_HOME)/tools/bin/sdkmanager --licenses	
 
 # plugin target need to avoid ENAMETOOLONG during plugin copy
 $(TESTPLUGIN_PATH):
@@ -21,18 +24,18 @@ $(TESTAPP_PATH): $(TESTPLUGIN_PATH)
 
 	# compatibility test
 	cd $(TESTAPP_PATH); cordova plugin add cordova-plugin-splashscreen \
-										   cordova-plugin-device@1.1.1 \
-										   cordova-plugin-file-opener2@2.0.19 \
-										   cordova-plugin-geolocation@1.0.1 \
-										   cordova-plugin-inappbrowser@1.5.0 \
-										   cordova-plugin-network-information@1.2.1 \
-										   cordova-plugin-splashscreen@4.0.0 \
-										   cordova-plugin-statusbar@2.0.0 \
-										   cordova-plugin-whitelist@1.0.0 \
-										   cordova-plugin-file@4.3.3 \
-										   ionic-plugin-keyboard@2.0.1 \
-										   cordova-plugin-android-permissions@1.0.0 \
-										   cordova-plugin-apprate@1.3.0
+		cordova-plugin-device@1.1.1 \
+		cordova-plugin-file-opener2@2.0.19 \
+		cordova-plugin-geolocation@1.0.1 \
+		cordova-plugin-inappbrowser@1.5.0 \
+		cordova-plugin-network-information@1.2.1 \
+		cordova-plugin-splashscreen@4.0.0 \
+		cordova-plugin-statusbar@2.0.0 \
+		cordova-plugin-whitelist@1.0.0 \
+		cordova-plugin-file@4.3.3 \
+		ionic-plugin-keyboard@2.0.1 \
+		cordova-plugin-android-permissions@1.0.0 \
+		cordova-plugin-apprate@1.3.0
 	cd $(TESTAPP_PATH); cordova plugin add cordova-plugin-crosswalk-webview@2.2.0 --variable XWALK_VERSION=20 --variable XWALK_COMMANDLINE=--disable-pull-to-refresh-effect --variable XWALK_MODE=embedded
 
 sample: $(TESTAPP_PATH)
