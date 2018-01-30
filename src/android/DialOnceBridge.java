@@ -60,12 +60,16 @@ public class DialOnceBridge extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("requestPermissions")) {
+        if ("requestPermissions".equals(action)) {
             cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     requestPermissions();
                 }
             });
+        } else if ("setEnableCallInterception".equals(action)) {
+            final boolean enabled = args.getBoolean(0);
+
+            DialOnce.setEnableCallInterception(enabled);
         } else {
             return false;
         }
