@@ -19,6 +19,10 @@ $(TESTPLUGIN_PATH):
 $(TESTAPP_PATH): $(TESTPLUGIN_PATH)
 	mkdir -p $(TESTAPP_PATH)
 	cordova create $(TESTAPP_PATH) com.dialonce.cordova.test DialCordova
+
+	cp sample/index.html $(BUILD_DIR)/sample/www/index.html
+	cp sample/index.js $(BUILD_DIR)/sample/www/js/index.js
+
 	cd $(TESTAPP_PATH); cordova platform add android
 	cd $(TESTAPP_PATH); cordova -d plugin add $(TESTPLUGIN_PATH) --variable ANDROID_API_KEY=$(ANDROID_API_KEY)
 
@@ -44,6 +48,9 @@ build: sample
 	cd $(TESTAPP_PATH); cordova build android
 	mkdir -p $(PWD)/build/sdk
 	zip build/sdk/cordova-plugin-dialonce-$(shell date "+%d-%m-%Y").zip -r src www package.json plugin.xml README.md
+
+install:
+	cd $(TESTAPP_PATH); cordova run android
 
 publish:
 	npm login
