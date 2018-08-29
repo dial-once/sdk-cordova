@@ -1,16 +1,22 @@
-dependencies:
-  pre:
-    - make deps
-
-general:
-  artifacts:
-    - build/sample/platforms/android/build/outputs/apk/android-debug.apk
-    - build/sdk
-
-test:
-  pre:
-    - make build
-
-machine:
-  environment:
-    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+version: 2
+jobs:
+  build:
+    working_directory: ~/dialonce-sdk-cordova
+    docker:
+      - image: beevelop/ionic:latest
+    environment:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx3200m -XX:+HeapDumpOnOutOfMemoryError"
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: apt-get update && apt-get install make zip && make deps
+      - run:
+          name: Building
+          command: make build
+      - store_artifacts:
+          path: build/sdk
+          destination: sdk
+      - store_artifacts:
+          path: build/sample/platforms/android/build/outputs/apk/
+          destination: sample
