@@ -1,5 +1,8 @@
 .PHONY: prereq test sample build clean
 
+ANDROID_COMPILE_SDK?="26"
+ANDROID_BUILD_TOOLS?="26.0.1"
+
 ANDROID_API_KEY=OWNkY2RkODZiNDA1MjY5YjE2ZTc3ZDMzODEwNWZmNDM6OmIwMjYwMjllYWVhYjc5MzQxYjdkOWZjNDMyYzdlMTc3NDNjNTdjZTE=
 BUILD_DIR=$(PWD)/build
 TESTAPP_PATH=$(BUILD_DIR)/sample
@@ -28,7 +31,7 @@ TESTAPP_PLUGINS1=cordova-plugin-crosswalk-webview@2.2.0 --variable XWALK_VERSION
 deps:
 	npm install -g cordova
 	echo y | android update sdk --no-ui --all --filter tools
-	echo y | $(ANDROID_HOME)/tools/bin/sdkmanager "platforms;android-26" "build-tools;26.0.1" "system-images;android-24;google_apis;armeabi-v7a" "extras;google;m2repository" tools emulator
+	echo y | $(ANDROID_HOME)/tools/bin/sdkmanager "platforms;android-$(ANDROID_COMPILE_SDK)" "build-tools;$(ANDROID_BUILD_TOOLS)" "system-images;android-24;google_apis;armeabi-v7a" "extra;android;m2repository" "extras;google;m2repository" tools emulator
 	yes | $(ANDROID_HOME)/tools/bin/sdkmanager --licenses	
 
 # plugin target need to avoid ENAMETOOLONG during plugin copy
