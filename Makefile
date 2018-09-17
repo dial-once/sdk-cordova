@@ -8,8 +8,6 @@ TESTPLUGIN_PATH=$(BUILD_DIR)/plugin
 deps:
 	npm install -g cordova
 	echo y | android update sdk --no-ui --all --filter tools
-	echo y | $(ANDROID_HOME)/tools/bin/sdkmanager "platforms;android-26" "build-tools;26.0.1" "system-images;android-24;google_apis;armeabi-v7a" "extras;google;m2repository" tools emulator
-	yes | $(ANDROID_HOME)/tools/bin/sdkmanager --licenses	
 
 # plugin target need to avoid ENAMETOOLONG during plugin copy
 $(TESTPLUGIN_PATH):
@@ -27,7 +25,8 @@ $(TESTAPP_PATH): $(TESTPLUGIN_PATH)
 	cd $(TESTAPP_PATH); cordova -d plugin add $(TESTPLUGIN_PATH) --variable ANDROID_API_KEY=$(ANDROID_API_KEY)
 
 	# compatibility test
-	cd $(TESTAPP_PATH); cordova plugin add cordova-plugin-splashscreen \
+	cd $(TESTAPP_PATH); cordova plugin add cordova-android-support-gradle-release \
+		cordova-plugin-splashscreen \
 		cordova-plugin-device@1.1.1 \
 		cordova-plugin-file-opener2@2.0.19 \
 		cordova-plugin-geolocation@1.0.1 \
@@ -40,7 +39,7 @@ $(TESTAPP_PATH): $(TESTPLUGIN_PATH)
 		ionic-plugin-keyboard@2.0.1 \
 		cordova-plugin-android-permissions@1.0.0 \
 		cordova-plugin-apprate@1.3.0
-	cd $(TESTAPP_PATH); cordova plugin add cordova-plugin-crosswalk-webview@2.2.0 --variable XWALK_VERSION=20 --variable XWALK_COMMANDLINE=--disable-pull-to-refresh-effect --variable XWALK_MODE=embedded
+	cd $(TESTAPP_PATH); cordova plugin add cordova-plugin-crosswalk-webview@2.4.0 --variable XWALK_VERSION=20 --variable XWALK_COMMANDLINE=--disable-pull-to-refresh-effect --variable XWALK_MODE=embedded
 
 sample: $(TESTAPP_PATH)
 
