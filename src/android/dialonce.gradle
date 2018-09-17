@@ -1,5 +1,9 @@
 repositories {
     jcenter()
+
+    // google() supported only in gradle 4.x
+    // https://stackoverflow.com/a/46467800/902217
+    maven { url 'https://maven.google.com' }
 }
 
 dependencies {
