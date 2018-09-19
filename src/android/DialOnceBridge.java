@@ -70,6 +70,10 @@ public class DialOnceBridge extends CordovaPlugin {
             final boolean enabled = args.getBoolean(0);
 
             DialOnce.setEnableCallInterception(enabled);
+        } else if ("setDebug".equals(action)) {
+            final boolean enabled = args.getBoolean(0);
+
+            DialOnce.setDebug(enabled);
         } else {
             return false;
         }
