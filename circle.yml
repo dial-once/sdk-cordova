@@ -12,8 +12,8 @@ jobs:
           name: Install dependencies
           command: apt-get update && apt-get install make zip && make deps
       - run:
-          name: Building
-          command: make build
+          name: Test & Build
+          command: make test
       - store_artifacts:
           path: build/sdk
           destination: sdk
