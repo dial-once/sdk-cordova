@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-dialonce",
-  "version": "2.6.13",
+  "version": "2.6.13.1",
   "description": "Cordova plugin for Dial Once",
   "cordova": {
     "id": "cordova-plugin-dialonce",
