@@ -32,11 +32,12 @@ var app = {
 
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        navigator.dialonce.setDebug(true);
+
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
         var switchElement = parentElement.querySelector('.switch');
-
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');

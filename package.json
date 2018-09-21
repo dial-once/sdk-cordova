@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-dialonce",
-  "version": "2.6.13",
+  "version": "2.6.13.1",
   "description": "Cordova plugin for Dial Once",
   "cordova": {
     "id": "cordova-plugin-dialonce",
@@ -33,5 +33,8 @@
   "bugs": {
     "url": "https://github.com/dial-once/sdk-cordova/issues"
   },
-  "homepage": "https://github.com/dial-once/sdk-cordova#readme"
+  "homepage": "https://github.com/dial-once/sdk-cordova#readme",
+  "dependencies": {
+    "cordova": "^7.1.0"
+  }
 }

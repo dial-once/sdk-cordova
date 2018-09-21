@@ -12,6 +12,10 @@ var dialonce = {
     setEnableCallInterception: function(enabled) {
     	exec(null, null, "DialOnce", "setEnableCallInterception", [enabled]);
     	this.isCallInterceptionEnabled = enabled;
+    },
+
+    setDebug: function(enabled) {
+        exec(null, null, "DialOnce", "setDebug", [enabled]);
     }
 };
 
