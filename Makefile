@@ -20,7 +20,7 @@ TESTAPP_PLUGINS= cordova-android-support-gradle-release	\
 	cordova-plugin-apprate								\
 	cordova-plugin-file-opener2							\
 
-TESTAPP_PLUGINS1=cordova-plugin-crosswalk-webview@2.2.0 --variable XWALK_VERSION=20 --variable XWALK_COMMANDLINE=--disable-pull-to-refresh-effect --variable XWALK_MODE=embedded
+TESTAPP_PLUGINS1=cordova-plugin-crosswalk-webview --variable XWALK_VERSION=20 --variable XWALK_COMMANDLINE=--disable-pull-to-refresh-effect --variable XWALK_MODE=embedded
 
 TEST_CORDOVA_VERSIONS=6.5.0 7.1.0
 CORDOVA_LOCAL=PATH=$(shell npm bin):$(PATH) cordova
@@ -55,7 +55,7 @@ endif
 
 	# compatibility test
 	cd $(TESTAPP_PATH); $(foreach plugin, $(TESTAPP_PLUGINS), $(CORDOVA_LOCAL) plugin add $(plugin);)
-	# cd $(TESTAPP_PATH); $(CORDOVA_LOCAL) plugin add $(TESTAPP_PLUGINS1)
+	cd $(TESTAPP_PATH); $(CORDOVA_LOCAL) plugin add $(TESTAPP_PLUGINS1)
 
 sample: $(TESTAPP_PATH)
 
