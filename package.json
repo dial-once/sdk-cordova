@@ -36,5 +36,12 @@
   "homepage": "https://github.com/dial-once/sdk-cordova#readme",
   "dependencies": {
     "cordova": "^7.1.0"
+  },
+  "devDependencies": {
+    "cordova-paramedic": "apache/cordova-paramedic#master"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
   }
 }

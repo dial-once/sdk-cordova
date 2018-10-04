@@ -58,52 +58,66 @@ public class DialOnceBridge extends CordovaPlugin {
         cordova.getActivity().setIntent(intent);
     }
 
+    /**
+     * @brief 'main' method to call DialOnce SDK API
+     * @details see https://cordova.apache.org/docs/en/latest/guide/platforms/android/plugin.html#threading
+     * 
+     * @param action method name
+     * @param JSONArray arguments
+     * @param CallbackContext to show execution result
+     * @return true if method wasn't found
+     */
     @Override
-    public boolean execute(String action, final JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         switch (action) {
-            case "init":
-                cordova.getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        try {
-                            String apiKey = args.getString(0);
-                            boolean displayInterstitial = args.optBoolean(1, false);
-                            DialOnce.init(cordova.getActivity(), apiKey, displayInterstitial);
-                        } catch (Exception e) {
-                            LOG.e(TAG, "Something went wrong during DialOnce.init :", e);
+            case "init": {
+                    final String apiKey = args.getString(0);
+                    cordova.getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            try {
+                                boolean displayInterstitial = args.optBoolean(1, false);
+                                DialOnce.init(cordova.getActivity(), apiKey, displayInterstitial);
+                                callbackContext.success();
+                            } catch (Exception e) {
+                                LOG.e(TAG, "Something went wrong during DialOnce.init : " + e.getMessage(), e);
+                            }
                         }
-                    }
-                });
+                    });
+                } 
                 break;
             case "requestPermissions":
                 cordova.getActivity().runOnUiThread(new Runnable() {
                     public void run() {
                         DialOnce.requestPermissions(cordova.getActivity());
+                        callbackContext.success();
                     }
                 });
                 break;
             case "setEnableCallInterception": {
                     boolean enabled = args.getBoolean(0);
                     DialOnce.setEnableCallInterception(enabled);
+                    callbackContext.success();
                 }
                 break;
 
-            case "setDebug":
-                cordova.getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        try {
-                            boolean enabled = args.getBoolean(0);
-                            DialOnce.setDebug(enabled);
-                        } catch (Exception e) {
-                            LOG.e(TAG, "Something went wrong during DialOnce.setDebug :", e);
+            case "setDebug": {
+                    final boolean enabled = args.getBoolean(0);
+                    cordova.getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            try {
+                                DialOnce.setDebug(enabled);
+                                callbackContext.success();
+                            } catch (Exception e) {
+                                LOG.e(TAG, "Something went wrong during DialOnce.setDebug : " + e.getMessage(), e);
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 break;
             default:
                 return false;
         }
 
-        callbackContext.success();
         return true;
     }
 
