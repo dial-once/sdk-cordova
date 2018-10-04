@@ -17,7 +17,7 @@ import android.text.TextUtils;
 import com.dialonce.sdk.DialOnce;
 
 public class DialOnceBridge extends CordovaPlugin {
-
+    private static final String ANDROID_API_KEY_PLACEHOLDER = "_";
     private static final String TAG = "dial-once-cordova";
     private static final String[] permissions = { Manifest.permission.INTERNET,
             Manifest.permission.ACCESS_NETWORK_STATE,
@@ -38,8 +38,8 @@ public class DialOnceBridge extends CordovaPlugin {
 
             String apiKey = applicationInfo.metaData.getString("DIAL_ONCE_API_KEY");
 
-            if (TextUtils.isEmpty(apiKey)) {
-                LOG.e(TAG, "ANDROID_API_KEY is empty. Have you set your ANDROID_API_KEY ?");
+            if (TextUtils.isEmpty(apiKey) || ANDROID_API_KEY_PLACEHOLDER.equals(apiKey)) {
+                LOG.w(TAG, "ANDROID_API_KEY is empty");
             } else {
                 DialOnce.init(context, apiKey);
             }
@@ -59,35 +59,52 @@ public class DialOnceBridge extends CordovaPlugin {
     }
 
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if ("requestPermissions".equals(action)) {
-            cordova.getActivity().runOnUiThread(new Runnable() {
-                public void run() {
-                    requestPermissions();
+    public boolean execute(String action, final JSONArray args, CallbackContext callbackContext) throws JSONException {
+        switch (action) {
+            case "init":
+                cordova.getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            String apiKey = args.getString(0);
+                            boolean displayInterstitial = args.optBoolean(1, false);
+                            DialOnce.init(cordova.getActivity(), apiKey, displayInterstitial);
+                        } catch (Exception e) {
+                            LOG.e(TAG, "Something went wrong during DialOnce.init :", e);
+                        }
+                    }
+                });
+                break;
+            case "requestPermissions":
+                cordova.getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        DialOnce.requestPermissions(cordova.getActivity());
+                    }
+                });
+                break;
+            case "setEnableCallInterception": {
+                    boolean enabled = args.getBoolean(0);
+                    DialOnce.setEnableCallInterception(enabled);
                 }
-            });
-        } else if ("setEnableCallInterception".equals(action)) {
-            final boolean enabled = args.getBoolean(0);
+                break;
 
-            DialOnce.setEnableCallInterception(enabled);
-        } else if ("setDebug".equals(action)) {
-            final boolean enabled = args.getBoolean(0);
-
-            DialOnce.setDebug(enabled);
-        } else {
-            return false;
+            case "setDebug":
+                cordova.getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            boolean enabled = args.getBoolean(0);
+                            DialOnce.setDebug(enabled);
+                        } catch (Exception e) {
+                            LOG.e(TAG, "Something went wrong during DialOnce.setDebug :", e);
+                        }
+                    }
+                });
+                break;
+            default:
+                return false;
         }
 
         callbackContext.success();
         return true;
-    }
-
-    private void requestPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!hasPermissions(permissions)) {
-                cordova.requestPermissions(this, REQUEST_CODE_PERMISSION, permissions);
-            }
-        }
     }
 
     private boolean hasPermissions(String[] permissions) {
