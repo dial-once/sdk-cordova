@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-dialonce-tests"
+    version="2.6.14">
+    
+    <name>Cordova DialOnce Plugin Tests</name>
+    <license>MIT License</license>
+
+    <dependency id="cordova-plugin-test-framework" />
+    <dependency id="cordova-plugin-dialonce" url=".." />
+
+    <js-module src="tests.js" name="tests" />
+</plugin>

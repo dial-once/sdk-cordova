@@ -1,7 +1,12 @@
 var exec = require('cordova/exec');
 
 var dialonce = {
-	isCallInterceptionEnabled: true,
+    isCallInterceptionEnabled: true,
+
+    init: function(apiKey, displayInterstitial) {
+        exec(null, null, "DialOnce", "init", [apiKey, displayInterstitial]);
+    },
+
     /**
      * Request permissions to ensure the SDK to work properly
      */
@@ -10,8 +15,8 @@ var dialonce = {
     },
 
     setEnableCallInterception: function(enabled) {
-    	exec(null, null, "DialOnce", "setEnableCallInterception", [enabled]);
-    	this.isCallInterceptionEnabled = enabled;
+        exec(null, null, "DialOnce", "setEnableCallInterception", [enabled]);
+        this.isCallInterceptionEnabled = enabled;
     },
 
     setDebug: function(enabled) {
