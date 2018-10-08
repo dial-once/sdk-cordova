@@ -18,7 +18,7 @@
 
     <!-- android -->
     <platform name="android">
-        <preference name="ANDROID_API_KEY"/>
+        <preference name="ANDROID_API_KEY" default="_"/>
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
